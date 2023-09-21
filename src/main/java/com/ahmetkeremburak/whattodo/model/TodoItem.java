@@ -11,7 +11,9 @@ public class TodoItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String Task;
 
+    @Column(nullable = false)
     private boolean isChecked;
 }
