@@ -16,4 +16,7 @@ public class TodoItem {
 
     @Column(nullable = false)
     private boolean isChecked;
+
+    @Enumerated(EnumType.STRING)
+    private TodoState todoState;
 }
