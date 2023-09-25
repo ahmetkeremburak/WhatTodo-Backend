@@ -8,6 +8,5 @@ public interface TodoAbstractService {
     ResponseTodoItem getTodoById(Long id);
     ResponseTodoItem getAllTodo();
     ResponseTodoItem updateTodo(UpdateTodoItem todoItem);
-
-
+    ResponseTodoItem updateTodo(UpdateTodoItem todoItem);
 }
