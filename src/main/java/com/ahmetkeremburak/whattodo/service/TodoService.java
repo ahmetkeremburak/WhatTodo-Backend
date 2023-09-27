@@ -31,6 +31,15 @@ public class TodoService implements TodoAbstractService {
     }
 
     @Override
+    public List<ResponseTodoItem> getAllTodo() {
+        List<TodoItem> rawList = repo.findAll(Sort.by("id").ascending());
+        List<ResponseTodoItem> respList = rawList.stream()
+                .map(Converters::todoItemToResponseItem)
+                .collect(Collectors.toList());
+        return respList;
+    }
+
+    @Override
     public ResponseTodoItem getTodoById(Long id) {
         TodoItem todoItem = repo.getReferenceById(id);
         ResponseTodoItem respTodoItem = Converters.todoItemToResponseItem(todoItem);
@@ -47,14 +56,7 @@ public class TodoService implements TodoAbstractService {
         return null;
     }
 
-    @Override
-    public List<ResponseTodoItem> getAllTodo() {
-        List<TodoItem> rawList = repo.findAll(Sort.by("id").ascending());
-        List<ResponseTodoItem> respList = rawList.stream()
-                .map(Converters::todoItemToResponseItem)
-                .collect(Collectors.toList());
-        return respList;
-    }
+
 
     @Override
     public ResponseTodoItem updateTodo(UpdateTodoItem todoItem) {
