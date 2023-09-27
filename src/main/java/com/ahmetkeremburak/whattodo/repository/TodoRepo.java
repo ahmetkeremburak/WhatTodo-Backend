@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface TodoRepo extends JpaRepository<TodoItem, Long> {
     List<TodoItem> findByTodoState(TodoState state);
+
+    List<TodoItem> findByIsChecked(boolean checked);
 }
