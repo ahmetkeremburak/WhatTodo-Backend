@@ -48,7 +48,11 @@ public class TodoService implements TodoAbstractService {
 
     @Override
     public List<ResponseTodoItem> getTodoByState(TodoState state) {
-        return null;
+        List<TodoItem> todoItems = repo.findByTodoState(state);
+        List<ResponseTodoItem> responseTodoItems = todoItems.stream()
+                .map(Converters::todoItemToResponseItem)
+                .collect(Collectors.toList());
+        return responseTodoItems;
     }
 
     @Override
