@@ -68,8 +68,16 @@ public class TodoService implements TodoAbstractService {
 
     @Override
     public ResponseTodoItem updateTodo(UpdateTodoItem todoItem) {
+        TodoItem todoItem1 = repo.findById(todoItem.getId()).orElse(null);
 
-        return null;
+        if(todoItem1 != null){
+            todoItem1 = repo.save(Converters.UpdateItemToTodoItem(todoItem));
+            ResponseTodoItem responseTodoItem = Converters.todoItemToResponseItem(todoItem1);
+            return responseTodoItem;
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
