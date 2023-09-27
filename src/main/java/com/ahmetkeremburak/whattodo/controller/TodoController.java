@@ -28,4 +28,9 @@ public class TodoController {
         return ResponseEntity.ok(listTodo);
     }
 
+    @GetMapping(value = "/todo/{id}")
+    public ResponseEntity<ResponseTodoItem> getTodoById(@PathVariable(name = "id") Long id){
+        return ResponseEntity.ok(service.getTodoById(id));
+    }
+
 }

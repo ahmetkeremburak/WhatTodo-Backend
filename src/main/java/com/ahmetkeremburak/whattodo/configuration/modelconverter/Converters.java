@@ -1,6 +1,7 @@
 package com.ahmetkeremburak.whattodo.configuration.modelconverter;
 
 import com.ahmetkeremburak.whattodo.controller.dto.request.CreateTodoItem;
+import com.ahmetkeremburak.whattodo.controller.dto.request.UpdateTodoItem;
 import com.ahmetkeremburak.whattodo.controller.dto.response.ResponseTodoItem;
 import com.ahmetkeremburak.whattodo.model.TodoItem;
 import com.ahmetkeremburak.whattodo.model.TodoState;
@@ -22,6 +23,15 @@ public class Converters {
         todo.setTask(createTodoItem.getTask());
         todo.setTodoState(TodoState.PRESENT);
         todo.setChecked(false);
+
+        return todo;
+    }
+
+    public static TodoItem UpdateItemToTodoItem(UpdateTodoItem updateTodoItem){
+        TodoItem todo = new TodoItem();
+        todo.setTask(updateTodoItem.getTask());
+        todo.setTodoState(updateTodoItem.getTodoState());
+        todo.setChecked(updateTodoItem.isChecked());
 
         return todo;
     }

@@ -31,23 +31,6 @@ public class TodoService implements TodoAbstractService {
     }
 
     @Override
-    public ResponseTodoItem getTodoById(Long id) {
-        TodoItem todoItem = repo.getReferenceById(id);
-        ResponseTodoItem respTodoItem = Converters.todoItemToResponseItem(todoItem);
-        return respTodoItem;
-    }
-
-    @Override
-    public List<ResponseTodoItem> getTodoByState(TodoState state) {
-        return null;
-    }
-
-    @Override
-    public List<ResponseTodoItem> getTodoByChecked(boolean checked) {
-        return null;
-    }
-
-    @Override
     public List<ResponseTodoItem> getAllTodo() {
         List<TodoItem> rawList = repo.findAll(Sort.by("id").ascending());
         List<ResponseTodoItem> respList = rawList.stream()
@@ -57,8 +40,44 @@ public class TodoService implements TodoAbstractService {
     }
 
     @Override
+    public ResponseTodoItem getTodoById(Long id) {
+        TodoItem todoItem = repo.getReferenceById(id);
+        ResponseTodoItem respTodoItem = Converters.todoItemToResponseItem(todoItem);
+        return respTodoItem;
+    }
+
+    @Override
+    public List<ResponseTodoItem> getTodoByState(TodoState state) {
+        List<TodoItem> todoItems = repo.findByTodoState(state);
+        List<ResponseTodoItem> responseTodoItems = todoItems.stream()
+                .map(Converters::todoItemToResponseItem)
+                .collect(Collectors.toList());
+        return responseTodoItems;
+    }
+
+    @Override
+    public List<ResponseTodoItem> getTodoByChecked(boolean checked) {
+        List<TodoItem> todoItems = repo.findByIsChecked(checked);
+        List<ResponseTodoItem> responseTodoItems = todoItems.stream()
+                .map(Converters::todoItemToResponseItem)
+                .collect(Collectors.toList());
+        return responseTodoItems;
+    }
+
+
+
+    @Override
     public ResponseTodoItem updateTodo(UpdateTodoItem todoItem) {
-        return null;
+        TodoItem todoItem1 = repo.findById(todoItem.getId()).orElse(null);
+
+        if(todoItem1 != null){
+            todoItem1 = repo.save(Converters.UpdateItemToTodoItem(todoItem));
+            ResponseTodoItem responseTodoItem = Converters.todoItemToResponseItem(todoItem1);
+            return responseTodoItem;
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
