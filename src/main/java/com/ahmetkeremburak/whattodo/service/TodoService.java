@@ -57,13 +57,18 @@ public class TodoService implements TodoAbstractService {
 
     @Override
     public List<ResponseTodoItem> getTodoByChecked(boolean checked) {
-        return null;
+        List<TodoItem> todoItems = repo.findByIsChecked(checked);
+        List<ResponseTodoItem> responseTodoItems = todoItems.stream()
+                .map(Converters::todoItemToResponseItem)
+                .collect(Collectors.toList());
+        return responseTodoItems;
     }
 
 
 
     @Override
     public ResponseTodoItem updateTodo(UpdateTodoItem todoItem) {
+
         return null;
     }
 
