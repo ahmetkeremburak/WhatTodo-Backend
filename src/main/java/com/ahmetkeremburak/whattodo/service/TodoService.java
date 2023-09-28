@@ -64,8 +64,6 @@ public class TodoService implements TodoAbstractService {
         return responseTodoItems;
     }
 
-
-
     @Override
     public ResponseTodoItem updateTodo(UpdateTodoItem todoItem) {
         TodoItem todoItem1 = repo.findById(todoItem.getId()).orElse(null);
@@ -82,6 +80,8 @@ public class TodoService implements TodoAbstractService {
 
     @Override
     public boolean deleteTodoById(Long id) {
-        return false;
+        repo.deleteById(id);
+        TodoItem todoItem1 = repo.findById(id).orElse(null);
+        return todoItem1 == null;
     }
 }
