@@ -12,6 +12,6 @@ public class ResponseTodoItem{
 
     private Long id;
     private String Task;
-    private boolean isChecked;
+    private boolean checked;
     private TodoState todoState;
 }

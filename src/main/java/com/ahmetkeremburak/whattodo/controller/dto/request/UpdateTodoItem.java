@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class UpdateTodoItem {
     private Long id;
     private String task;
-    private boolean isChecked;
+    private boolean checked;
     private TodoState todoState;
 }

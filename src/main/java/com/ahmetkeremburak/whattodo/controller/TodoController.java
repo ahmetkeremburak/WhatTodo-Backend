@@ -41,8 +41,8 @@ public class TodoController {
     }
 
     @GetMapping(value = "/todo/{checked}")
-    public ResponseEntity<List<ResponseTodoItem>> getTodoByChecked(@PathVariable(name = "checked") boolean isChecked){
-        return ResponseEntity.ok(service.getTodoByChecked(isChecked));
+    public ResponseEntity<List<ResponseTodoItem>> getTodoByChecked(@PathVariable(name = "checked") boolean checked){
+        return ResponseEntity.ok(service.getTodoByChecked(checked));
     }
 
     @PutMapping(name = "/todo")
